@@ -14,6 +14,8 @@ SWAGGER_CMD=generate -i $(SWAGGER_URL) -l html2 -o /local/dist/swagger
 all: docs swagger
 
 ghpages: docs swagger
+	git add .
+	git commit -m 'updating ghpages'
 	git subtree push --prefix dist origin gh-pages
 
 deploy: docs swagger
