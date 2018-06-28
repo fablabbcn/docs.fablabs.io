@@ -1,0 +1,25 @@
+{
+  "name": "docs.fablabs.io",
+  "version": "1.0.0",
+  "description": "FabLabs.io API Documentation",
+  "scripts": {
+    "start": "serve",
+    "deploy" : "make && now --public",
+    "ghpages" : "make && git subtree push --prefix dist origin gh-pages"
+    "now-build": "echo nop",
+    "build": "make"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/fablabbcn/docs.fablabs.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fablabbcn/docs.fablabs.io/issues"
+  },
+  "homepage": "https://github.com/fablabbcn/docs.fablabs.io#readme",
+  "dependencies": {
+    "serve": "^9.1.0"
+  }
+}
