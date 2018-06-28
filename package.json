@@ -4,6 +4,7 @@
   "description": "FabLabs.io API Documentation",
   "scripts": {
     "start": "serve",
+    "dev": "make dev",
     "deploy" : "make && now --public",
     "ghpages" : "make && git subtree push --prefix dist origin gh-pages"
     "now-build": "echo nop",

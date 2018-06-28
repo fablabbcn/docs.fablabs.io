@@ -13,6 +13,11 @@ SWAGGER_CMD=generate -i $(SWAGGER_URL) -l html2 -o /local/dist/swagger
 
 all: docs swagger
 
+ghpages: docs swagger
+	git subtree push --prefix dist origin gh-pages
+
+deploy: docs swagger
+	now --public
 
 docs:
 	docker $(DOCS_DOCKER_OPTS) $(DOCS_DOCKER_IMG) $(DOCS_DOCKER_CMD)
@@ -20,5 +25,5 @@ docs:
 swagger: docs
 	docker $(SWAGGER_DOCKER_OPTS) $(SWAGGER_IMG) $(SWAGGER_CMD)
 
-serve:
+dev:
 	docker  $(DOCS_DOCKER_OPTS) $(DOCS_PORTMAP) $(DOCS_DOCKER_IMG) $(DOCS_SERVE_CMD)
