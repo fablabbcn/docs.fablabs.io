@@ -16,6 +16,7 @@ all: docs swagger
 ghpages: docs swagger
 	git add .
 	git commit -m 'updating ghpages'
+	cp CNAME dist/CNAME
 	git subtree push --prefix dist origin gh-pages
 
 deploy: docs swagger
