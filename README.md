@@ -19,6 +19,17 @@ $ make
 
 In the dist/ folder you can then find the built documentation
 
+# Mkdocs serve
+
+You can preview in realtime changes using the following command
+
+```
+$ make dev
+```
+
+Then point your browser to http://localhost:8000
+
+
 # Deployment
 
 Run in the root folder the following commands:
