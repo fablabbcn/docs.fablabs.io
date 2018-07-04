@@ -1,6 +1,8 @@
 site_name: Fablabs.io developer guide
 docs_dir: /mkdocs/docs
 repo_url: https://github.com/fablabbcn/docs.fablabs.io
+edit_uri: edit/master/mkdocs/docs/
+
 pages: 
 - Home: 'index.md'
 - Examples: 'examples.md'
