@@ -11,4 +11,4 @@ theme:
 extra:
   links:
   - title: 'API Reference'
-    url: './swagger/index.html'
+    url: 'http://docs.fablabs.io/swagger/index.html'
