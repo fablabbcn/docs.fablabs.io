@@ -14,9 +14,9 @@ SWAGGER_CMD=generate -i $(SWAGGER_URL) -l html2 -o /local/dist/swagger
 all: docs swagger
 
 ghpages: docs swagger
+	cp CNAME dist/CNAME
 	git add .
 	git commit -m 'updating ghpages'
-	cp CNAME dist/CNAME
 	git subtree push --prefix dist origin gh-pages
 
 deploy: docs swagger
