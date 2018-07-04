@@ -1,2 +1,14 @@
 site_name: Fablabs.io developer guide
 docs_dir: /mkdocs/docs
+repo_url: https://github.com/fablabbcn/docs.fablabs.io
+pages: 
+- Home: 'index.md'
+- Examples: 'examples.md'
+- Libraries: 'libraries.md'
+theme:
+    name: mkdocs
+    custom_dir: /mkdocs/custom_theme
+extra:
+  links:
+  - title: 'API Reference'
+    url: './swagger/index.html'

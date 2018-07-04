@@ -980,6 +980,22 @@ margin-bottom: 20px;
 };
             defs.inline_response_200_10 = {
   "properties" : {
+    "meta" : {
+      "$ref" : "#/definitions/MetaInfo"
+    },
+    "data" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/OrganizationExtract"
+      }
+    },
+    "links" : {
+      "$ref" : "#/definitions/PaginationInfo"
+    }
+  }
+};
+            defs.inline_response_200_11 = {
+  "properties" : {
     "data" : {
       "$ref" : "#/definitions/Organization"
     }
@@ -1023,7 +1039,7 @@ margin-bottom: 20px;
     "data" : {
       "type" : "array",
       "items" : {
-        "$ref" : "#/definitions/Machine"
+        "$ref" : "#/definitions/LabMapExtract"
       }
     },
     "links" : {
@@ -1033,12 +1049,28 @@ margin-bottom: 20px;
 };
             defs.inline_response_200_6 = {
   "properties" : {
+    "meta" : {
+      "$ref" : "#/definitions/MetaInfo"
+    },
+    "data" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/Machine"
+      }
+    },
+    "links" : {
+      "$ref" : "#/definitions/PaginationInfo"
+    }
+  }
+};
+            defs.inline_response_200_7 = {
+  "properties" : {
     "data" : {
       "$ref" : "#/definitions/Machine"
     }
   }
 };
-            defs.inline_response_200_7 = {
+            defs.inline_response_200_8 = {
   "properties" : {
     "meta" : {
       "$ref" : "#/definitions/MetaInfo"
@@ -1054,26 +1086,10 @@ margin-bottom: 20px;
     }
   }
 };
-            defs.inline_response_200_8 = {
+            defs.inline_response_200_9 = {
   "properties" : {
     "data" : {
       "$ref" : "#/definitions/Project"
-    }
-  }
-};
-            defs.inline_response_200_9 = {
-  "properties" : {
-    "meta" : {
-      "$ref" : "#/definitions/MetaInfo"
-    },
-    "data" : {
-      "type" : "array",
-      "items" : {
-        "$ref" : "#/definitions/OrganizationExtract"
-      }
-    },
-    "links" : {
-      "$ref" : "#/definitions/PaginationInfo"
     }
   }
 };
@@ -1197,6 +1213,38 @@ margin-bottom: 20px;
     },
     "avatar" : {
       "type" : "string"
+    }
+  }
+};
+            defs.LabMapExtract = {
+  "properties" : {
+    "type" : {
+      "type" : "string",
+      "enum" : [ "lab" ]
+    },
+    "id" : {
+      "type" : "integer",
+      "format" : "int64"
+    },
+    "attributes" : {
+      "$ref" : "#/definitions/LabMapExtract_attributes"
+    }
+  }
+};
+            defs.LabMapExtract_attributes = {
+  "properties" : {
+    "name" : {
+      "type" : "string"
+    },
+    "id" : {
+      "type" : "integer",
+      "format" : "int64"
+    },
+    "latitude" : {
+      "type" : "number"
+    },
+    "longitude" : {
+      "type" : "number"
     }
   }
 };
@@ -1715,6 +1763,9 @@ margin-bottom: 20px;
                     </li>
                     <li data-group="Labs" data-name="listLabs" class="">
                       <a href="#api-Labs-listLabs">listLabs</a>
+                    </li>
+                    <li data-group="Labs" data-name="mapLabs" class="">
+                      <a href="#api-Labs-mapLabs">mapLabs</a>
                     </li>
                     <li data-group="Labs" data-name="searchLabs" class="">
                       <a href="#api-Labs-searchLabs">searchLabs</a>
@@ -5230,6 +5281,338 @@ except ApiException as e:
                         </article>
                       </div>
                       <hr>
+                    <div id="api-Labs-mapLabs">
+                      <article id="api-Labs-mapLabs-0" data-group="User" data-name="mapLabs" data-version="0">
+                        <div class="pull-left">
+                          <h1>mapLabs</h1>
+                          <p>Get a listing of coordinates for labs</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked">This method allows to show a map of labs</p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/labs/map</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Labs-mapLabs-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Labs-mapLabs-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Labs-mapLabs-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Labs-mapLabs-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Labs-mapLabs-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Labs-mapLabs-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Labs-mapLabs-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Labs-mapLabs-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Labs-mapLabs-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Labs-mapLabs-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Labs-mapLabs-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Labs-mapLabs-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X GET "http://api.fablabs.io/labs/map"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Labs-mapLabs-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.LabsApi;
+
+import java.io.File;
+import java.util.*;
+
+public class LabsApiExample {
+
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        
+        // Configure OAuth2 access token for authorization: OAuth2
+        OAuth OAuth2 = (OAuth) defaultClient.getAuthentication("OAuth2");
+        OAuth2.setAccessToken("YOUR ACCESS TOKEN");
+
+        LabsApi apiInstance = new LabsApi();
+        try {
+            inline_response_200_5 result = apiInstance.mapLabs();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling LabsApi#mapLabs");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Labs-mapLabs-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.LabsApi;
+
+public class LabsApiExample {
+
+    public static void main(String[] args) {
+        LabsApi apiInstance = new LabsApi();
+        try {
+            inline_response_200_5 result = apiInstance.mapLabs();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling LabsApi#mapLabs");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Labs-mapLabs-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Labs-mapLabs-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">Configuration *apiConfig = [Configuration sharedConfig];
+
+// Configure OAuth2 access token for authorization: (authentication scheme: OAuth2)
+[apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
+
+
+LabsApi *apiInstance = [[LabsApi alloc] init];
+
+// Get a listing of coordinates for labs
+[apiInstance mapLabsWithCompletionHandler: 
+              ^(inline_response_200_5 output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Labs-mapLabs-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var FablabsioApi = require('fablabsio_api');
+var defaultClient = FablabsioApi.ApiClient.instance;
+
+// Configure OAuth2 access token for authorization: OAuth2
+var OAuth2 = defaultClient.authentications['OAuth2'];
+OAuth2.accessToken = "YOUR ACCESS TOKEN"
+
+var api = new FablabsioApi.LabsApi()
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.mapLabs(callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Labs-mapLabs-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Labs-mapLabs-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class mapLabsExample
+    {
+        public void main()
+        {
+            
+            // Configure OAuth2 access token for authorization: OAuth2
+            Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
+
+            var apiInstance = new LabsApi();
+
+            try
+            {
+                // Get a listing of coordinates for labs
+                inline_response_200_5 result = apiInstance.mapLabs();
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling LabsApi.mapLabs: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Labs-mapLabs-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure OAuth2 access token for authorization: OAuth2
+Swagger\Client\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+$api_instance = new Swagger\Client\Api\LabsApi();
+
+try {
+    $result = $api_instance->mapLabs();
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling LabsApi->mapLabs: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Labs-mapLabs-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::LabsApi;
+
+# Configure OAuth2 access token for authorization: OAuth2
+$WWW::SwaggerClient::Configuration::access_token = 'YOUR_ACCESS_TOKEN';
+
+my $api_instance = WWW::SwaggerClient::LabsApi->new();
+
+eval { 
+    my $result = $api_instance->mapLabs();
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling LabsApi->mapLabs: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Labs-mapLabs-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# Configure OAuth2 access token for authorization: OAuth2
+swagger_client.configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# create an instance of the API class
+api_instance = swagger_client.LabsApi()
+
+try: 
+    # Get a listing of coordinates for labs
+    api_response = api_instance.map_labs()
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling LabsApi->mapLabs: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+
+
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - Results listing </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-mapLabs-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-mapLabs-200-schema">
+                                  <div id='responses-mapLabs-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Results listing",
+  "schema" : {
+    "$ref" : "#/definitions/inline_response_200_5"
+  }
+};
+                                        var schema = schemaWrapper.schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-mapLabs-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-mapLabs-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-mapLabs-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                            <h3> Status: 400 - Bad request: A required parameter is missing
+ </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                            </div>
+
+                            <h3> Status: 404 - Not found: The specified resource was not found
+ </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-mapLabs-404-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-mapLabs-404-schema">
+                                  <div id='responses-mapLabs-404-schema-404' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Not found: The specified resource was not found\n",
+  "schema" : {
+    "$ref" : "#/definitions/APIError"
+  }
+};
+                                        var schema = schemaWrapper.schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-mapLabs-404-schema-data').val(stringify(schema));
+                                        var result = $('#responses-mapLabs-404-schema-404');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-mapLabs-404-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
                     <div id="api-Labs-searchLabs">
                       <article id="api-Labs-searchLabs-0" data-group="User" data-name="searchLabs" data-version="0">
                         <div class="pull-left">
@@ -6199,7 +6582,7 @@ public class MachinesApiExample {
         MachinesApi apiInstance = new MachinesApi();
         Body_6 body = ; // Body_6 | data to be updated
         try {
-            inline_response_200_6 result = apiInstance.createMachine(body);
+            inline_response_200_7 result = apiInstance.createMachine(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling MachinesApi#createMachine");
@@ -6218,7 +6601,7 @@ public class MachinesApiExample {
         MachinesApi apiInstance = new MachinesApi();
         Body_6 body = ; // Body_6 | data to be updated
         try {
-            inline_response_200_6 result = apiInstance.createMachine(body);
+            inline_response_200_7 result = apiInstance.createMachine(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling MachinesApi#createMachine");
@@ -6243,7 +6626,7 @@ MachinesApi *apiInstance = [[MachinesApi alloc] init];
 
 // Create a new machine 
 [apiInstance createMachineWith:body
-              completionHandler: ^(inline_response_200_6 output, NSError* error) {
+              completionHandler: ^(inline_response_200_7 output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -6304,7 +6687,7 @@ namespace Example
             try
             {
                 // Create a new machine 
-                inline_response_200_6 result = apiInstance.createMachine(body);
+                inline_response_200_7 result = apiInstance.createMachine(body);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -6446,7 +6829,7 @@ $(document).ready(function() {
                                         var schemaWrapper = {
   "description" : "Machine Profile",
   "schema" : {
-    "$ref" : "#/definitions/inline_response_200_6"
+    "$ref" : "#/definitions/inline_response_200_7"
   }
 };
                                         var schema = schemaWrapper.schema;
@@ -6583,7 +6966,7 @@ public class MachinesApiExample {
         MachinesApi apiInstance = new MachinesApi();
         Long id = 789; // Long | id for the requested machine
         try {
-            inline_response_200_6 result = apiInstance.getMachineById(id);
+            inline_response_200_7 result = apiInstance.getMachineById(id);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling MachinesApi#getMachineById");
@@ -6602,7 +6985,7 @@ public class MachinesApiExample {
         MachinesApi apiInstance = new MachinesApi();
         Long id = 789; // Long | id for the requested machine
         try {
-            inline_response_200_6 result = apiInstance.getMachineById(id);
+            inline_response_200_7 result = apiInstance.getMachineById(id);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling MachinesApi#getMachineById");
@@ -6627,7 +7010,7 @@ MachinesApi *apiInstance = [[MachinesApi alloc] init];
 
 // Get a machine by id
 [apiInstance getMachineByIdWith:id
-              completionHandler: ^(inline_response_200_6 output, NSError* error) {
+              completionHandler: ^(inline_response_200_7 output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -6688,7 +7071,7 @@ namespace Example
             try
             {
                 // Get a machine by id
-                inline_response_200_6 result = apiInstance.getMachineById(id);
+                inline_response_200_7 result = apiInstance.getMachineById(id);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -6821,7 +7204,7 @@ except ApiException as e:
                                         var schemaWrapper = {
   "description" : "Machine Profile",
   "schema" : {
-    "$ref" : "#/definitions/inline_response_200_6"
+    "$ref" : "#/definitions/inline_response_200_7"
   }
 };
                                         var schema = schemaWrapper.schema;
@@ -6961,7 +7344,7 @@ public class MachinesApiExample {
         BigDecimal page = 8.14; // BigDecimal | Results page
         BigDecimal pageSize = 8.14; // BigDecimal | Results per page
         try {
-            inline_response_200_5 result = apiInstance.listMachines(sort, sortOrder, page, pageSize);
+            inline_response_200_6 result = apiInstance.listMachines(sort, sortOrder, page, pageSize);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling MachinesApi#listMachines");
@@ -6983,7 +7366,7 @@ public class MachinesApiExample {
         BigDecimal page = 8.14; // BigDecimal | Results page
         BigDecimal pageSize = 8.14; // BigDecimal | Results per page
         try {
-            inline_response_200_5 result = apiInstance.listMachines(sort, sortOrder, page, pageSize);
+            inline_response_200_6 result = apiInstance.listMachines(sort, sortOrder, page, pageSize);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling MachinesApi#listMachines");
@@ -7014,7 +7397,7 @@ MachinesApi *apiInstance = [[MachinesApi alloc] init];
     sortOrder:sortOrder
     page:page
     pageSize:pageSize
-              completionHandler: ^(inline_response_200_5 output, NSError* error) {
+              completionHandler: ^(inline_response_200_6 output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -7082,7 +7465,7 @@ namespace Example
             try
             {
                 // List all machines
-                inline_response_200_5 result = apiInstance.listMachines(sort, sortOrder, page, pageSize);
+                inline_response_200_6 result = apiInstance.listMachines(sort, sortOrder, page, pageSize);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -7278,7 +7661,7 @@ except ApiException as e:
                                         var schemaWrapper = {
   "description" : "Listings",
   "schema" : {
-    "$ref" : "#/definitions/inline_response_200_5"
+    "$ref" : "#/definitions/inline_response_200_6"
   }
 };
                                         var schema = schemaWrapper.schema;
@@ -7416,7 +7799,7 @@ public class MachinesApiExample {
         Long id = 789; // Long | id for the requested machine
         Body_7 body = ; // Body_7 | data to be updated
         try {
-            inline_response_200_6 result = apiInstance.updateMachineById(id, body);
+            inline_response_200_7 result = apiInstance.updateMachineById(id, body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling MachinesApi#updateMachineById");
@@ -7436,7 +7819,7 @@ public class MachinesApiExample {
         Long id = 789; // Long | id for the requested machine
         Body_7 body = ; // Body_7 | data to be updated
         try {
-            inline_response_200_6 result = apiInstance.updateMachineById(id, body);
+            inline_response_200_7 result = apiInstance.updateMachineById(id, body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling MachinesApi#updateMachineById");
@@ -7463,7 +7846,7 @@ MachinesApi *apiInstance = [[MachinesApi alloc] init];
 // Update a machine by id
 [apiInstance updateMachineByIdWith:id
     body:body
-              completionHandler: ^(inline_response_200_6 output, NSError* error) {
+              completionHandler: ^(inline_response_200_7 output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -7527,7 +7910,7 @@ namespace Example
             try
             {
                 // Update a machine by id
-                inline_response_200_6 result = apiInstance.updateMachineById(id, body);
+                inline_response_200_7 result = apiInstance.updateMachineById(id, body);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -7705,7 +8088,7 @@ $(document).ready(function() {
                                         var schemaWrapper = {
   "description" : "Machine Profile",
   "schema" : {
-    "$ref" : "#/definitions/inline_response_200_6"
+    "$ref" : "#/definitions/inline_response_200_7"
   }
 };
                                         var schema = schemaWrapper.schema;
@@ -9944,7 +10327,7 @@ public class OrganizationsApiExample {
         OrganizationsApi apiInstance = new OrganizationsApi();
         Long id = 789; // Long | id for the requested organization
         try {
-            inline_response_200_10 result = apiInstance.getOrganizationsById(id);
+            inline_response_200_11 result = apiInstance.getOrganizationsById(id);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling OrganizationsApi#getOrganizationsById");
@@ -9963,7 +10346,7 @@ public class OrganizationsApiExample {
         OrganizationsApi apiInstance = new OrganizationsApi();
         Long id = 789; // Long | id for the requested organization
         try {
-            inline_response_200_10 result = apiInstance.getOrganizationsById(id);
+            inline_response_200_11 result = apiInstance.getOrganizationsById(id);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling OrganizationsApi#getOrganizationsById");
@@ -9988,7 +10371,7 @@ OrganizationsApi *apiInstance = [[OrganizationsApi alloc] init];
 
 // Get an organization by id
 [apiInstance getOrganizationsByIdWith:id
-              completionHandler: ^(inline_response_200_10 output, NSError* error) {
+              completionHandler: ^(inline_response_200_11 output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -10049,7 +10432,7 @@ namespace Example
             try
             {
                 // Get an organization by id
-                inline_response_200_10 result = apiInstance.getOrganizationsById(id);
+                inline_response_200_11 result = apiInstance.getOrganizationsById(id);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -10182,7 +10565,7 @@ except ApiException as e:
                                         var schemaWrapper = {
   "description" : "Organization profile",
   "schema" : {
-    "$ref" : "#/definitions/inline_response_200_10"
+    "$ref" : "#/definitions/inline_response_200_11"
   }
 };
                                         var schema = schemaWrapper.schema;
@@ -10322,7 +10705,7 @@ public class OrganizationsApiExample {
         BigDecimal page = 8.14; // BigDecimal | Results page
         BigDecimal pageSize = 8.14; // BigDecimal | Results per page
         try {
-            inline_response_200_9 result = apiInstance.listOrganizations(sort, sortOrder, page, pageSize);
+            inline_response_200_10 result = apiInstance.listOrganizations(sort, sortOrder, page, pageSize);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling OrganizationsApi#listOrganizations");
@@ -10344,7 +10727,7 @@ public class OrganizationsApiExample {
         BigDecimal page = 8.14; // BigDecimal | Results page
         BigDecimal pageSize = 8.14; // BigDecimal | Results per page
         try {
-            inline_response_200_9 result = apiInstance.listOrganizations(sort, sortOrder, page, pageSize);
+            inline_response_200_10 result = apiInstance.listOrganizations(sort, sortOrder, page, pageSize);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling OrganizationsApi#listOrganizations");
@@ -10375,7 +10758,7 @@ OrganizationsApi *apiInstance = [[OrganizationsApi alloc] init];
     sortOrder:sortOrder
     page:page
     pageSize:pageSize
-              completionHandler: ^(inline_response_200_9 output, NSError* error) {
+              completionHandler: ^(inline_response_200_10 output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -10443,7 +10826,7 @@ namespace Example
             try
             {
                 // List all organizations
-                inline_response_200_9 result = apiInstance.listOrganizations(sort, sortOrder, page, pageSize);
+                inline_response_200_10 result = apiInstance.listOrganizations(sort, sortOrder, page, pageSize);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -10639,7 +11022,7 @@ except ApiException as e:
                                         var schemaWrapper = {
   "description" : "Listings",
   "schema" : {
-    "$ref" : "#/definitions/inline_response_200_9"
+    "$ref" : "#/definitions/inline_response_200_10"
   }
 };
                                         var schema = schemaWrapper.schema;
@@ -10777,7 +11160,7 @@ public class OrganizationsApiExample {
         Long id = 789; // Long | id for the requested organization
         Body_11 body = ; // Body_11 | data to be updated
         try {
-            inline_response_200_10 result = apiInstance.updateOrganizationById(id, body);
+            inline_response_200_11 result = apiInstance.updateOrganizationById(id, body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling OrganizationsApi#updateOrganizationById");
@@ -10797,7 +11180,7 @@ public class OrganizationsApiExample {
         Long id = 789; // Long | id for the requested organization
         Body_11 body = ; // Body_11 | data to be updated
         try {
-            inline_response_200_10 result = apiInstance.updateOrganizationById(id, body);
+            inline_response_200_11 result = apiInstance.updateOrganizationById(id, body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling OrganizationsApi#updateOrganizationById");
@@ -10824,7 +11207,7 @@ OrganizationsApi *apiInstance = [[OrganizationsApi alloc] init];
 // Update an organization by id
 [apiInstance updateOrganizationByIdWith:id
     body:body
-              completionHandler: ^(inline_response_200_10 output, NSError* error) {
+              completionHandler: ^(inline_response_200_11 output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -10888,7 +11271,7 @@ namespace Example
             try
             {
                 // Update an organization by id
-                inline_response_200_10 result = apiInstance.updateOrganizationById(id, body);
+                inline_response_200_11 result = apiInstance.updateOrganizationById(id, body);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -11066,7 +11449,7 @@ $(document).ready(function() {
                                         var schemaWrapper = {
   "description" : "Organization profile",
   "schema" : {
-    "$ref" : "#/definitions/inline_response_200_10"
+    "$ref" : "#/definitions/inline_response_200_11"
   }
 };
                                         var schema = schemaWrapper.schema;
@@ -11633,7 +12016,7 @@ public class ProjectsApiExample {
         ProjectsApi apiInstance = new ProjectsApi();
         Body_8 body = ; // Body_8 | data to be updated
         try {
-            inline_response_200_8 result = apiInstance.createProject(body);
+            inline_response_200_9 result = apiInstance.createProject(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling ProjectsApi#createProject");
@@ -11652,7 +12035,7 @@ public class ProjectsApiExample {
         ProjectsApi apiInstance = new ProjectsApi();
         Body_8 body = ; // Body_8 | data to be updated
         try {
-            inline_response_200_8 result = apiInstance.createProject(body);
+            inline_response_200_9 result = apiInstance.createProject(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling ProjectsApi#createProject");
@@ -11677,7 +12060,7 @@ ProjectsApi *apiInstance = [[ProjectsApi alloc] init];
 
 // Create a new project 
 [apiInstance createProjectWith:body
-              completionHandler: ^(inline_response_200_8 output, NSError* error) {
+              completionHandler: ^(inline_response_200_9 output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -11738,7 +12121,7 @@ namespace Example
             try
             {
                 // Create a new project 
-                inline_response_200_8 result = apiInstance.createProject(body);
+                inline_response_200_9 result = apiInstance.createProject(body);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -11880,7 +12263,7 @@ $(document).ready(function() {
                                         var schemaWrapper = {
   "description" : "Project profile",
   "schema" : {
-    "$ref" : "#/definitions/inline_response_200_8"
+    "$ref" : "#/definitions/inline_response_200_9"
   }
 };
                                         var schema = schemaWrapper.schema;
@@ -12017,7 +12400,7 @@ public class ProjectsApiExample {
         ProjectsApi apiInstance = new ProjectsApi();
         Long id = 789; // Long | id for the requested project
         try {
-            inline_response_200_8 result = apiInstance.getProjectById(id);
+            inline_response_200_9 result = apiInstance.getProjectById(id);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling ProjectsApi#getProjectById");
@@ -12036,7 +12419,7 @@ public class ProjectsApiExample {
         ProjectsApi apiInstance = new ProjectsApi();
         Long id = 789; // Long | id for the requested project
         try {
-            inline_response_200_8 result = apiInstance.getProjectById(id);
+            inline_response_200_9 result = apiInstance.getProjectById(id);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling ProjectsApi#getProjectById");
@@ -12061,7 +12444,7 @@ ProjectsApi *apiInstance = [[ProjectsApi alloc] init];
 
 // Get a project by id
 [apiInstance getProjectByIdWith:id
-              completionHandler: ^(inline_response_200_8 output, NSError* error) {
+              completionHandler: ^(inline_response_200_9 output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -12122,7 +12505,7 @@ namespace Example
             try
             {
                 // Get a project by id
-                inline_response_200_8 result = apiInstance.getProjectById(id);
+                inline_response_200_9 result = apiInstance.getProjectById(id);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -12255,7 +12638,7 @@ except ApiException as e:
                                         var schemaWrapper = {
   "description" : "Project profile",
   "schema" : {
-    "$ref" : "#/definitions/inline_response_200_8"
+    "$ref" : "#/definitions/inline_response_200_9"
   }
 };
                                         var schema = schemaWrapper.schema;
@@ -12395,7 +12778,7 @@ public class ProjectsApiExample {
         BigDecimal page = 8.14; // BigDecimal | Results page
         BigDecimal pageSize = 8.14; // BigDecimal | Results per page
         try {
-            inline_response_200_7 result = apiInstance.listProjects(sort, sortOrder, page, pageSize);
+            inline_response_200_8 result = apiInstance.listProjects(sort, sortOrder, page, pageSize);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling ProjectsApi#listProjects");
@@ -12417,7 +12800,7 @@ public class ProjectsApiExample {
         BigDecimal page = 8.14; // BigDecimal | Results page
         BigDecimal pageSize = 8.14; // BigDecimal | Results per page
         try {
-            inline_response_200_7 result = apiInstance.listProjects(sort, sortOrder, page, pageSize);
+            inline_response_200_8 result = apiInstance.listProjects(sort, sortOrder, page, pageSize);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling ProjectsApi#listProjects");
@@ -12448,7 +12831,7 @@ ProjectsApi *apiInstance = [[ProjectsApi alloc] init];
     sortOrder:sortOrder
     page:page
     pageSize:pageSize
-              completionHandler: ^(inline_response_200_7 output, NSError* error) {
+              completionHandler: ^(inline_response_200_8 output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -12516,7 +12899,7 @@ namespace Example
             try
             {
                 // List all projects
-                inline_response_200_7 result = apiInstance.listProjects(sort, sortOrder, page, pageSize);
+                inline_response_200_8 result = apiInstance.listProjects(sort, sortOrder, page, pageSize);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -12712,7 +13095,7 @@ except ApiException as e:
                                         var schemaWrapper = {
   "description" : "Listings",
   "schema" : {
-    "$ref" : "#/definitions/inline_response_200_7"
+    "$ref" : "#/definitions/inline_response_200_8"
   }
 };
                                         var schema = schemaWrapper.schema;
@@ -12853,7 +13236,7 @@ public class ProjectsApiExample {
         BigDecimal page = 8.14; // BigDecimal | Results page
         BigDecimal pageSize = 8.14; // BigDecimal | Results per page
         try {
-            inline_response_200_7 result = apiInstance.searchProjects(type, q, page, pageSize);
+            inline_response_200_8 result = apiInstance.searchProjects(type, q, page, pageSize);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling ProjectsApi#searchProjects");
@@ -12876,7 +13259,7 @@ public class ProjectsApiExample {
         BigDecimal page = 8.14; // BigDecimal | Results page
         BigDecimal pageSize = 8.14; // BigDecimal | Results per page
         try {
-            inline_response_200_7 result = apiInstance.searchProjects(type, q, page, pageSize);
+            inline_response_200_8 result = apiInstance.searchProjects(type, q, page, pageSize);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling ProjectsApi#searchProjects");
@@ -12908,7 +13291,7 @@ ProjectsApi *apiInstance = [[ProjectsApi alloc] init];
     q:q
     page:page
     pageSize:pageSize
-              completionHandler: ^(inline_response_200_7 output, NSError* error) {
+              completionHandler: ^(inline_response_200_8 output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -12978,7 +13361,7 @@ namespace Example
             try
             {
                 // Search for projects
-                inline_response_200_7 result = apiInstance.searchProjects(type, q, page, pageSize);
+                inline_response_200_8 result = apiInstance.searchProjects(type, q, page, pageSize);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -13178,7 +13561,7 @@ except ApiException as e:
                                         var schemaWrapper = {
   "description" : "Search Results",
   "schema" : {
-    "$ref" : "#/definitions/inline_response_200_7"
+    "$ref" : "#/definitions/inline_response_200_8"
   }
 };
                                         var schema = schemaWrapper.schema;
@@ -13316,7 +13699,7 @@ public class ProjectsApiExample {
         Long id = 789; // Long | id for the requested projects
         Body_9 body = ; // Body_9 | data to be updated
         try {
-            inline_response_200_8 result = apiInstance.updateProjectById(id, body);
+            inline_response_200_9 result = apiInstance.updateProjectById(id, body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling ProjectsApi#updateProjectById");
@@ -13336,7 +13719,7 @@ public class ProjectsApiExample {
         Long id = 789; // Long | id for the requested projects
         Body_9 body = ; // Body_9 | data to be updated
         try {
-            inline_response_200_8 result = apiInstance.updateProjectById(id, body);
+            inline_response_200_9 result = apiInstance.updateProjectById(id, body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling ProjectsApi#updateProjectById");
@@ -13363,7 +13746,7 @@ ProjectsApi *apiInstance = [[ProjectsApi alloc] init];
 // Update a project by id
 [apiInstance updateProjectByIdWith:id
     body:body
-              completionHandler: ^(inline_response_200_8 output, NSError* error) {
+              completionHandler: ^(inline_response_200_9 output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -13427,7 +13810,7 @@ namespace Example
             try
             {
                 // Update a project by id
-                inline_response_200_8 result = apiInstance.updateProjectById(id, body);
+                inline_response_200_9 result = apiInstance.updateProjectById(id, body);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -13605,7 +13988,7 @@ $(document).ready(function() {
                                         var schemaWrapper = {
   "description" : "Project profile",
   "schema" : {
-    "$ref" : "#/definitions/inline_response_200_8"
+    "$ref" : "#/definitions/inline_response_200_9"
   }
 };
                                         var schema = schemaWrapper.schema;
